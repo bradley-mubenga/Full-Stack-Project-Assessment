@@ -5,18 +5,24 @@ import { UpVote, DownVote } from './buttons';
 import videoData from './exampleresponse.json';
 
 export default function Videos() {
+    //Video Data State
     const [ theVideoData, setVideoData ] = useState(["Nothing"]);
 
+    //Updating Video Data Each Time State Changes
     useEffect(() => {
         setVideoData(videoData);
     }, []);
+
+    const upVote = (videoData) => {
+        videoData.rating++;
+    }
 
     let videoHTML = theVideoData.map((video) =>
         <div key={video.id}>
             <h3>{video.title}</h3>
             <p>{video.rating} votes</p>
             <div>
-                <UpVote />
+                <UpVote upVote={upVote} video={video}/>
                 <DownVote />
             </div>
 
