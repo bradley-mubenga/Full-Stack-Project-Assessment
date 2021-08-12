@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 //React Components
 import Videos from './Videos';
@@ -11,7 +11,16 @@ import videoDataJSON from './exampleresponse.json';
 //
 function App() {
   //Video Data State
-  const [ videoData, setVideoData ] = useState(videoDataJSON);
+  const [ videoData, setVideoData ] = useState([]);
+
+  useEffect(() => {
+    //
+    fetch('http://127.0.0.1:5000/')
+    .then(res => res.json())
+    .then(data => setVideoData(data))
+  }, [])
+
+  console.log(videoData)
 
   return (
     <div className="App">
