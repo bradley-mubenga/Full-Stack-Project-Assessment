@@ -1,19 +1,13 @@
-//Express Modules
-const express = require("express");
-const app = express();
-const cors = require('cors')
-const port = process.env.PORT || 5000;
+var express = require('express')
+var cors = require('cors')
+var app = express()
 
-//
-const crudRoutes = require('./crud');
+app.use(cors())
 
-//
-app.use(express.json());
+let _CRUD = require('./crud');
+app.use(_CRUD)
 
-app.use(cors());
+app.listen(process.env.PORT || 5000, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
 
-//CRUD Routes Midlleware
-app.use(crudRoutes)
-
-//PORT
-app.listen(port, () => console.log(`Listening on port ${port}`));
